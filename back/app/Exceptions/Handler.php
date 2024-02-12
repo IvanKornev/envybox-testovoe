@@ -3,28 +3,26 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
+use Exception;
 
 class Handler extends ExceptionHandler
 {
     /**
-     * The list of the inputs that are never flashed to the session on validation exceptions.
+     * Регистрация обработчика ошибок
      *
-     * @var array<int, string>
-     */
-    protected $dontFlash = [
-        'current_password',
-        'password',
-        'password_confirmation',
-    ];
-
-    /**
-     * Register the exception handling callbacks for the application.
+     * @return void
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (Exception $e, $req) {
+            if (!$req->is('api/*')) {
+                return;
+            }
+            $fallbackMessage = 'Запись не найдена';
+            $message = $e->getMessage() ?? $fallbackMessage;
+            $code = $e->getCode();
+            $code = $code !== 0 ? $code : 404;
+            return response()->json(['message' => $message], $code);
         });
     }
 }
