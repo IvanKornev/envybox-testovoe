@@ -12,7 +12,7 @@
         v-model="state.name"
         required
       />
-      <VTextField
+      <VTextarea
         label="Обращение"
         v-model="state.appeal"
         required
@@ -30,19 +30,6 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
-import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
-const rules = {
-  name: { required },
-  appeal: { required, },
-};
-const initialState = {
-  name: '',
-  appeal: '',
-};
-const state = reactive({
-  ...initialState,
-});
-const v$ = useVuelidate(rules, state);
+import useForm from '@/widgets/feedback/model/useForm';
+const { state, v$ } = useForm();
 </script>
