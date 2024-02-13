@@ -5,7 +5,12 @@
         <VAppBar :elevation="2">
           <template #prepend>
             <ul>
-              <RouterLink to="/" class="menu__item">Обратная связь</RouterLink>
+              <RouterLink
+                to="/"
+                class="menu__item"
+              >
+                Обратная связь
+              </RouterLink>
             </ul>
           </template>
         </VAppBar>
