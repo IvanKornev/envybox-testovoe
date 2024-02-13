@@ -1,26 +1,47 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <VApp>
+      <VContainer>
+        <VAppBar :elevation="2">
+          <template #prepend>
+            <ul>
+              <RouterLink
+                to="/"
+                class="menu__item"
+              >
+                Обратная связь
+              </RouterLink>
+              <RouterLink
+                to="/feedbacks"
+                class="menu__item"
+              >
+                Сохраненные формы
+              </RouterLink>
+            </ul>
+          </template>
+        </VAppBar>
+      </VContainer>
+      <VContainer>
+        <main class="page__content">
+          <RouterView />
+        </main>
+      </VContainer>
+    </VApp>
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+<style scoped>
+.page__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.menu__item {
+  text-decoration: none;
+  color: blue;
+}
+.menu__item:not(:first-child) {
+  margin-left: 20px;
 }
 </style>
