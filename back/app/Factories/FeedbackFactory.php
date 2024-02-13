@@ -3,7 +3,8 @@
 namespace App\Factories;
 
 use App\Factories\Contracts\IFeedbackFactory;
-use App\Repositories\FeedbackRepository;
+use App\Services\Contracts\IFeedbackService;
+use App\Services\FeedbackDatabaseService;
 
 use InvalidArgumentException;
 
@@ -12,10 +13,10 @@ class FeedbackFactory implements IFeedbackFactory
     const INVALID_TARGET_ERROR = 'Данные не могут быть переданы '
         . 'такому обработчику';
 
-    private object $targetClass;
+    private IFeedbackService $targetClass;
     private static array $availableTargets = [
-        'database' => FeedbackRepository::class,
-        'email' => FeedbackRepository::class,
+        'database' => FeedbackDatabaseService::class,
+        'email' => FeedbackDatabaseService::class,
     ];
 
     public function __construct(string $target = 'database')
