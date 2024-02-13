@@ -1,28 +1,10 @@
 version: '3.9'
 
 services:
-    frontend:
-        build:
-            context: ./front
-            dockerfile: ../docker/vue/Dockerfile
-        container_name: envybox-frontend
-        restart: unless-stopped
-        working_dir: /app
-        ports:
-            - "3008:80"
-        env_file:
-            - .env
-        volumes:
-            - ./front/:/app
-        depends_on:
-            - api
-        networks:
-           - envybox-http-server-network
-
     api:
         build:
-            context: ./back
-            dockerfile: ../docker/php/Dockerfile
+            context: .
+            dockerfile: ./docker/php/Dockerfile
         container_name: envybox-api
         restart: unless-stopped
         user: ${UID}:${GID}
@@ -30,7 +12,7 @@ services:
         env_file:
             - .env
         volumes:
-            - ./back/:/var/www
+            - ./:/var/www
         depends_on:
             - database
         networks:
@@ -59,8 +41,8 @@ services:
         ports:
             - "80:80"
         volumes:
-            - ./back:/var/www
-            - ./back/storage/logs/nginx:/var/log/nginx/
+            - ./:/var/www
+            - ./storage/logs/nginx:/var/log/nginx/
             - ./docker/nginx/default.template:/etc/nginx/templates/default.conf.template
         depends_on:
             - api
