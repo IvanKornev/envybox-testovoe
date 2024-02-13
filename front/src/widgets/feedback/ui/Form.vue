@@ -7,6 +7,7 @@
       fast-fail
       @submit.prevent="submitForm"
     >
+      <SuccessDialog />
       <VTextField
         label="Имя"
         v-model="state.name"
@@ -32,7 +33,11 @@
 
 <script>
 import useForm from '@/widgets/feedback/model/useForm';
+import { SuccessDialog } from '@/features/show-success-dialog';
 export default {
+  components: {
+    SuccessDialog,
+  },
   data() {
     return {
       isLoading: false,
