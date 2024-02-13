@@ -4,21 +4,20 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Factories\Contracts\IFeedbackFactory;
+use App\Factories\FeedbackFactory;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Регистрирует фабрику обработчиков обр.связи
+     *
+     * @return void
      */
     public function register(): void
     {
-        //
-    }
-
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
-        //
+        $this->app->bind(IFeedbackFactory::class, function ($app) {
+            return new FeedbackFactory('database');
+        });
     }
 }
