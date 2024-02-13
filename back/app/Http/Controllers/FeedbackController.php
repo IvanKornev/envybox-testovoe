@@ -25,9 +25,11 @@ class FeedbackController extends Controller
     public function store(FeedbackRequest $request): JsonResponse
     {
         $formBody = $request->validated();
-        $this->factory->save($formBody);
+        $savedFeedback = $this->factory->save($formBody);
         return response()->json([
+            'status' => 'success',
             'message' => 'Обращение было успешно сохранено',
+            'savedFeedback' => $savedFeedback,
         ]);
     }
 }
