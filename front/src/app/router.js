@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import index from '@/pages';
-import feedbacks from '@/pages';
+import index from '@/pages/index';
+import feedbacks from '@/pages/feedbacks';
 
 const routes = [
   { path: '/', component: index },

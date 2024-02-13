@@ -1,17 +1,17 @@
 <template>
   <section class="content">
     <h2 class="mb-4 text-center">
-      Форма обратной связи
+      Сохраненные формы
     </h2>
-    <FeedbackForm />
+    <SavedFeedbacksList />
   </section>
 </template>
 
 <script>
-import { FeedbackForm } from '@/widgets/feedback';
+import { SavedFeedbacksList } from '@/widgets/feedback';
 export default {
   components: {
-    FeedbackForm,
+    SavedFeedbacksList,
   },
 };
 </script>
