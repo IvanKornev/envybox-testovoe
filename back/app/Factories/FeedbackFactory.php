@@ -3,6 +3,8 @@
 namespace App\Factories;
 
 use App\Factories\Contracts\IFeedbackFactory;
+use App\Repositories\FeedbackRepository;
+
 use InvalidArgumentException;
 
 class FeedbackFactory implements IFeedbackFactory
@@ -12,8 +14,8 @@ class FeedbackFactory implements IFeedbackFactory
 
     private object $targetClass;
     private static array $availableTargets = [
-        'database' => null,
-        'email' => null,
+        'database' => FeedbackRepository::class,
+        'email' => FeedbackRepository::class,
     ];
 
     public function __construct(string $target = 'database')
@@ -29,10 +31,12 @@ class FeedbackFactory implements IFeedbackFactory
     /**
      * Обрабатывает обращение через форму обр.связи
      *
-     * @return void
+     * @param array $formBody
+     * @return array
      */
-    public function save(array $formBody): void
+    public function save(array $formBody): array
     {
-        print_r($formBody);
+        $savedFeedback = $this->targetClass->save($formBody);
+        return $savedFeedback;
     }
 }

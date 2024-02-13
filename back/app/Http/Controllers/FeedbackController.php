@@ -26,6 +26,8 @@ class FeedbackController extends Controller
     {
         $formBody = $request->validated();
         $this->factory->save($formBody);
-        return response()->json(['message' => 'ok']);
+        return response()->json([
+            'message' => 'Обращение было успешно сохранено',
+        ]);
     }
 }

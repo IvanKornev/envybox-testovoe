@@ -7,7 +7,8 @@ interface IFeedbackFactory
     /**
      * Обрабатывает обращение через форму обр.связи
      *
-     * @return void
+     * @param array $formBody
+     * @return array
      */
-    public function save(array $formBody): void;
+    public function save(array $formBody): array;
 }
