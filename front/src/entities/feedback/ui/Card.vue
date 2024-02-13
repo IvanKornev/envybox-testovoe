@@ -1,19 +1,43 @@
 <template>
-  <v-card
+  <VCard
+    max-width="350"
     class="mx-auto"
-    max-width="344"
     color="primary"
     variant="tonal"
   >
-    <v-card-item>
-      <div>
-        <div class="text-h6 mb-1">
-          Headline
+    <VCardItem>
+      <div class="item__wrapper">
+        <div class="text-h6 mb-3">
+          Имя: {{ item.name }} (отправлено: {{ createdAtDate }})
         </div>
-        <div class="text-caption">
-          Greyhound divisely hello coldly fonwderfully
+        <div class="text-h6">
+          {{ item.appeal }}
         </div>
       </div>
-    </v-card-item>
-  </v-card>
+    </VCardItem>
+  </VCard>
 </template>
+
+<script>
+export default {
+  props: {
+    item: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    createdAtDate() {
+      return new Date(this.item.created_at).toLocaleString();
+    },
+  },
+};
+</script>
+
+<style scoped>
+.item__wrapper {
+  max-height: 300px;
+  padding-right: 16px;
+  overflow: auto;
+}
+</style>

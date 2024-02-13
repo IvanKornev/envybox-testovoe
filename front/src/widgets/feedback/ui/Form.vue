@@ -14,13 +14,15 @@
       />
       <VTextField
         label="Имя"
-        v-model="state.name"
+        maxlength="40"
+        v-model.trim="state.name"
         required
       />
       <VTextarea
         label="Обращение"
+        maxlength="200"
         resize="none"
-        v-model="state.appeal"
+        v-model.trim="state.appeal"
         required
       />
       <VBtn
