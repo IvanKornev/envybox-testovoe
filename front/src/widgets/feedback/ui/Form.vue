@@ -5,7 +5,7 @@
   >
     <VForm
       fast-fail
-      @submit.prevent
+      @submit.prevent="submitForm"
     >
       <VTextField
         label="Имя"
@@ -19,7 +19,7 @@
       />
       <VBtn
         type="submit"
-        :disabled="v$.$invalid"
+        :disabled="buttonWasDisabled"
         block
         class="mt-2"
       >
@@ -29,7 +29,33 @@
   </VSheet>
 </template>
 
-<script setup>
+<script>
 import useForm from '@/widgets/feedback/model/useForm';
-const { state, v$ } = useForm();
+export default {
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
+  setup() {
+    const { state, v$ } = useForm();
+    return { state, v$ };
+  },
+  computed: {
+    buttonWasDisabled() {
+      return this.v$.$invalid || this.isLoading;
+    },
+  },
+  methods: {
+    async submitForm() {
+      if (this.isLoading) {
+        return;
+      }
+      this.isLoading = true;
+      await this.$api.feedback.add(this.state).finally(() => {
+        this.isLoading = false;
+      });
+    },
+  },
+};
 </script>
