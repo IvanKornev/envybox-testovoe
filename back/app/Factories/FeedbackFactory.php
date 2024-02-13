@@ -4,7 +4,9 @@ namespace App\Factories;
 
 use App\Factories\Contracts\IFeedbackFactory;
 use App\Services\Contracts\IFeedbackService;
+
 use App\Services\FeedbackDatabaseService;
+use App\Services\FeedbackEmailService;
 
 use InvalidArgumentException;
 
@@ -16,7 +18,7 @@ class FeedbackFactory implements IFeedbackFactory
     private IFeedbackService $targetClass;
     private static array $availableTargets = [
         'database' => FeedbackDatabaseService::class,
-        'email' => FeedbackDatabaseService::class,
+        'email' => FeedbackEmailService::class,
     ];
 
     public function __construct(string $target = 'database')
