@@ -4,7 +4,7 @@ services:
     frontend:
         build:
             context: ./front
-            dockerfile: ../_docker/vue/Dockerfile
+            dockerfile: ../docker/vue/Dockerfile
         container_name: envybox-frontend
         restart: unless-stopped
         working_dir: /app
@@ -22,7 +22,7 @@ services:
     api:
         build:
             context: ./back
-            dockerfile: ../_docker/php/Dockerfile
+            dockerfile: ../docker/php/Dockerfile
         container_name: envybox-api
         restart: unless-stopped
         user: ${UID}:${GID}
@@ -61,7 +61,7 @@ services:
         volumes:
             - ./back:/var/www
             - ./back/storage/logs/nginx:/var/log/nginx/
-            - ./_docker/nginx/default.template:/etc/nginx/templates/default.conf.template
+            - ./docker/nginx/default.template:/etc/nginx/templates/default.conf.template
         depends_on:
             - api
         networks:
