@@ -11,6 +11,12 @@
               >
                 Обратная связь
               </RouterLink>
+              <RouterLink
+                to="/feedbacks"
+                class="menu__item"
+              >
+                Сохраненные формы
+              </RouterLink>
             </ul>
           </template>
         </VAppBar>
@@ -34,5 +40,8 @@
 .menu__item {
   text-decoration: none;
   color: blue;
+}
+.menu__item:not(:first-child) {
+  margin-left: 20px;
 }
 </style>
