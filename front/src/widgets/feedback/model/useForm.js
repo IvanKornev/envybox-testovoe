@@ -16,7 +16,11 @@ const useForm = () => {
     ...INITIAL_STATE,
   });
   const v$ = useVuelidate(rules, state);
-  return { state, v$ };
+  const clearForm = () => {
+    state.name = '';
+    state.appeal = '';
+  };
+  return { state, v$, clearForm };
 };
 
 export default useForm;

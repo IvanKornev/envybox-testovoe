@@ -14,6 +14,7 @@
       />
       <VTextarea
         label="Обращение"
+        resize="none"
         v-model="state.appeal"
         required
       />
@@ -38,8 +39,8 @@ export default {
     };
   },
   setup() {
-    const { state, v$ } = useForm();
-    return { state, v$ };
+    const { state, v$, clearForm } = useForm();
+    return { state, v$, clearForm };
   },
   computed: {
     buttonWasDisabled() {
@@ -52,9 +53,17 @@ export default {
         return;
       }
       this.isLoading = true;
-      await this.$api.feedback.add(this.state).finally(() => {
-        this.isLoading = false;
-      });
+      await this.$api.feedback.add(this.state)
+        .then(this.handleSubmitResult)
+        .finally(() => {
+          this.isLoading = false;
+        });
+    },
+    handleSubmitResult({ status, savedFeedback }) {
+      if (status === 'success') {
+        this.$store.commit('feedbacks/save', savedFeedback);
+      }
+      this.clearForm();
     },
   },
 };
