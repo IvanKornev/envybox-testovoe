@@ -1,6 +1,6 @@
 <template>
   <section class="content">
-    <h2 class="mb-4 text-center">
+    <h2 class="mb-10 text-center">
       Сохраненные формы
     </h2>
     <SavedFeedbacksList />

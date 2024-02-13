@@ -1,5 +1,9 @@
 <template>
-  <VDialog :model-value="isOpen" width="500" @update:modelValue="closeDialog">
+  <VDialog
+    :model-value="isOpen"
+    width="500"
+    @update:modelValue="closeDialog"
+  >
     <template #default>
       <VCard title="Успех!">
         <VCardText>
