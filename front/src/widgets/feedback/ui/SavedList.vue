@@ -3,6 +3,9 @@
     <div v-if="list.length > 0" class="list__wrapper">
       <FeedbackCard v-for="item in list" :key="item.id" :item="item" class="wrapper__card" />
     </div>
+    <div v-else>
+      <p>Вы ещё не отправили ни одной формы</p>
+    </div>
   </div>
 </template>
 
