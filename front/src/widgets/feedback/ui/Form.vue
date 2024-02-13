@@ -7,7 +7,11 @@
       fast-fail
       @submit.prevent="submitForm"
     >
-      <SuccessDialog />
+      <SuccessDialog
+        v-if="successDialogIsOpen"
+        :is-open="successDialogIsOpen"
+        @close="successDialogIsOpen = false"
+      />
       <VTextField
         label="Имя"
         v-model="state.name"
@@ -41,6 +45,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      successDialogIsOpen: false,
     };
   },
   setup() {
@@ -66,6 +71,7 @@ export default {
     },
     handleSubmitResult({ status, savedFeedback }) {
       if (status === 'success') {
+        this.successDialogIsOpen = true;
         this.$store.commit('feedbacks/save', savedFeedback);
       }
       this.clearForm();
